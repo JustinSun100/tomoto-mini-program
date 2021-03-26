@@ -1,0 +1,13 @@
+<!--pages/tomato/tomato.wxml-->
+<view class="container">
+<view ><g-clock text="{{time}}" fontSize="48" ></g-clock></view> 
+<view class="stop" wx:if="{{!againButtonVisible}}">
+<g-button  type="change" size="mini" text="暂停" bindtap="stopTimer" wx:if="{{timerStatus==='stop'}}"></g-button>
+<g-button type="change" size="mini" text="开始" bindtap="startTimer" wx:else></g-button>
+</view>
+<g-button size="mini" text="放弃" bindtap="showConfirm" wx:if="{{!againButtonVisible}}"></g-button>
+<g-button type="change" size="mini" text="再来一次" wx:if="{{againButtonVisible}}" bindtap="againTimer"></g-button>
+<g-confirm visible="{{confirmVisible}}" placeholder="放弃理由" bindconfirm="confirmAbandon" bindcancel="hideConfirm"></g-confirm>
+
+<g-confirm  visible="{{finishVisible}}" placeholder="完成了什么" bindconfirm="confirmFinish" bindcancel="cancelFinish" ></g-confirm>
+</view>
