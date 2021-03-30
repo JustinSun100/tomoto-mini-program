@@ -1,4 +1,5 @@
 // pages/home/home.js
+const {http} = require('../../lib/http.js');
 Page({
 
   /**
@@ -15,13 +16,24 @@ Page({
   },
   confirm(event){
   },
+  onShow(){
+    http.get('/todos?completed=false').then(response=>{
+      this.setData({ lists: response.data.resources })
+    })
+  },
   confirmCreate(event){
     let content = event.detail
-    if(content){
-      let todo = [{ id: this.data.lists.length + 1, text: content, finished: false }]
-      this.data.lists = todo.concat(this.data.lists)
-      this.setData({ lists: this.data.lists })
-      this.hideConfirm()
+    console.log(content)
+    if (content) {
+      http.post('/todos',{
+          completed: false, description: content
+      })
+      .then(response => {
+        let todo = [response.data.resource]
+        this.data.lists = todo.concat(this.data.lists)
+        this.setData({ lists: this.data.lists })
+        this.hideCreateConfirm()
+      })
     }
   },
   destoryTodo(event){
