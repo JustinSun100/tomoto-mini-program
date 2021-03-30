@@ -11,7 +11,7 @@
   <view class="tomato-wrapper">
     <navigator class="tomato" url="/pages/tomato/tomato">
      <g-clock text="点击开始闹钟"></g-clock>
-    </navigator>
-    <g-confirm placeholder="完成了什么" visible="{{visible}}" bindconfirm="confirmCreate" bindcancel="hideConfirm"></g-confirm>
+    <g-confirm placeholder="完成了什么" visible="{{visible}}" bindconfirm="confirmCreate" bindcancel="hideConfirm"></g-confirm> 
+     </navigator>
   </view>
 </view>

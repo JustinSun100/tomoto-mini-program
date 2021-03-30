@@ -3,13 +3,13 @@ Page({
   timer:null,
   data: {
     time:"",
-     defalutSecond:5,
-    timerStatus:'stop',
+     defalutSecond:1500,
+    timerStatus:'start',
     confirmVisible:false,
     againButtonVisible:false,
     finishVisible:false
   }, 
-  onShow: function(){
+  onload: function(){
   this.startTimer()
   },
   startTimer(){
@@ -27,7 +27,6 @@ Page({
   },
   stopTimer(){
     clearInterval(this.timer)
-          this.timer=null
           this.setData({timerStatus:'start'})
   },
   changeTime(){
@@ -44,8 +43,8 @@ Page({
     }  
     this.setData({ time: `${m}:${s}` })
   },
-  confirmAbandon(){
-   wx:wx.navigateBack({
+  confirmAbandon(event){ 
+   wx.navigateBack({
      to:-1
    })
   },
@@ -69,8 +68,6 @@ cancelFinish(){
   this.setData({finishVisible:false})
 },
 
-  onHide: function () {
 
-  },
 
 })

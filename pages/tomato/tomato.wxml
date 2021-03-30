@@ -2,8 +2,9 @@
 <view class="container">
 <view ><g-clock text="{{time}}" fontSize="48" ></g-clock></view> 
 <view class="stop" wx:if="{{!againButtonVisible}}">
-<g-button  type="change" size="mini" text="暂停" bindtap="stopTimer" wx:if="{{timerStatus==='stop'}}"></g-button>
-<g-button type="change" size="mini" text="开始" bindtap="startTimer" wx:else></g-button>
+<g-button type="change" size="mini" text="开始" bindtap="startTimer" wx:if="{{timerStatus==='start'}}"></g-button>
+<g-button  type="change" size="mini" text="暂停" bindtap="stopTimer" wx:else></g-button>
+
 </view>
 <g-button size="mini" text="放弃" bindtap="showConfirm" wx:if="{{!againButtonVisible}}"></g-button>
 <g-button type="change" size="mini" text="再来一次" wx:if="{{againButtonVisible}}" bindtap="againTimer"></g-button>

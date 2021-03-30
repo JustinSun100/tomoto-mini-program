@@ -1,13 +1,26 @@
-// pages/test/test.js
+// pages/binding/binding.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    account:"",
+    password:"",
+    isbinding:true
+  },
+  watchAccount(event){
 
   },
+  watchPassword(event){
 
+  },
+goToSignUp(){
+  this.setData({isbinding:false})
+},
+goToBinding(){
+  this.setData({isbinding:true})
+},
   /**
    * 生命周期函数--监听页面加载
    */
