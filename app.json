@@ -1,46 +1,37 @@
 {
-  "pages":[   
-    "pages/home/home",    
+  "pages": [
+    "pages/home/home",
+    "pages/binding/binding",
     "pages/login/login",
-    "pages/binding/binding", 
     "pages/me/me",
     "pages/tomato/tomato",
-    "pages/logs/logs"
-   
+    "pages/test/test"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "番茄闹钟",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json",
-  "tabBar":{
-    "color":"#515151",
-    "selectedColor":"#F6705A",
-    "backgroundColor":"#fff",
-    "borderStyle":"black",
-    "list":[
+  "tabBar": {
+    "color": "#515151",
+    "selectedColor": "#F6705A",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
       {
-        "pagePath":"pages/home/home",
-        "text":"首页",
-        "iconPath":"images/home.png",
-        "selectedIconPath":"images/home-active.png"
-
+        "pagePath": "pages/home/home",
+        "text": "专注",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
       },
       {
-        "pagePath":"pages/tomato/tomato",
-        "text":"统计",
-        "iconPath":"images/total.png",
-        "selectedIconPath":"images/total-active.png"
-      },
-      {
-        "pagePath":"pages/me/me",
-        "text":"我的",
-        "iconPath":"images/me.png",
-        "selectedIconPath":"images/me-active.png"
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "images/me.png",
+        "selectedIconPath": "images/me-active.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

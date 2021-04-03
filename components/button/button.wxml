@@ -1,2 +1,1 @@
-<!--components/button/button.wxml-->
-<button class="tomato-button {{type==='change'?'change':'default'}} {{size==='mini'&&'mini'}}">{{text}}</button>
+<button class="tomato-button {{type === 'default' ? 'default' : 'change'}} {{size === 'mini' && 'mini'}}">{{text}}</button>

@@ -1,5 +1,3 @@
-/* components/confirm/confirm.wxss */
-
 .cantainer { 
   position: absolute;
   left: 0;

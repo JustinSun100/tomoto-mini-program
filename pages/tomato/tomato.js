@@ -1,33 +1,45 @@
 // pages/tomato/tomato.js
+const { http } = require('../../lib/http.js');
+
 Page({
-  timer:null,
+  timer: null,
   data: {
-    time:"",
-     defalutSecond:1500,
-    timerStatus:'start',
-    confirmVisible:false,
-    againButtonVisible:false,
-    finishVisible:false
-  }, 
-  onload: function(){
-  this.startTimer()
+    defalutSecond: 1500,
+    time: "",
+    timerStatus: 'stop', 
+    confirmVisible: false,
+    againButtonVisible: false,
+    finishConfirmVisible: false,
+    tomato: {}
+  },
+  onShow: function () {
+    this.startTimer()
+    http.post('/tomatoes').then(response => {
+      this.setData({ tomato: response.data.resource })
+    })
   },
   startTimer(){
-    this.setData({timerStatus:'stop'})
+    this.setData({ timerStatus: 'start' })
     this.changeTime()
-    this.timer=setInterval(()=>{
-      this.data.defalutSecond=this.data.defalutSecond-1
-        this.changeTime()
-        if(this.data.defalutSecond===0){
-          this.setData({finishVisible:true})
-          this.setData({againButtonVisible:true})
-          return this.stopTimer()
-        } 
-      },1000) 
+    this.timer = setInterval(() => {
+      this.data.defalutSecond = this.data.defalutSecond - 1
+      this.changeTime()
+      if (this.data.defalutSecond <= 0){ 
+        this.setData({ againButtonVisible: true })
+        this.setData({ finishConfirmVisible: true })
+        return this.clearTimer()
+      }
+    }, 1000)
   },
-  stopTimer(){
+  againTimer(){
+    this.data.defalutSecond = 1500
+    this.setData({ againButtonVisible: false })
+    this.startTimer()
+  },
+  clearTimer(){
     clearInterval(this.timer)
-          this.setData({timerStatus:'start'})
+    this.timer = null
+    this.setData({ timerStatus: 'stop' })
   },
   changeTime(){
     let m = Math.floor(this.data.defalutSecond/60)
@@ -40,34 +52,45 @@ Page({
     }
     if ((m + "").length === 1) {
       m = "0" + m
-    }  
+    }
     this.setData({ time: `${m}:${s}` })
   },
-  confirmAbandon(event){ 
-   wx.navigateBack({
-     to:-1
-   })
+  confirmAbandon(event){
+    let content = event.detail
+    http.put(`/tomatoes/${this.data.tomato.id}`,{
+      description: content,
+      aborted: true
+    })
+    .then(response => {
+      wx.navigateBack({ to: -1 })
+    })
   },
- showConfirm(){
-    this.setData({confirmVisible:true})
-    this.stopTimer()
- },
- hideConfirm(){
-  this.setData({confirmVisible:false})
-  this.startTimer()
- },
-againTimer(){
-  this.data.defalutSecond=3
-  this.startTimer()
-  this.setData({againButtonVisible:false})
-},
-confirmFinish(){
-  xxx
-},
-cancelFinish(){
-  this.setData({finishVisible:false})
-},
-
-
-
+  confirmFinish(event){
+    let content = event.detail
+  },
+  confirmCancel(){
+    this.setData({ finishConfirmVisible: false })
+  },
+  showConfirm(){
+    this.setData({ confirmVisible: true })
+    this.clearTimer()
+  },
+  hideConfirm(){
+    this.setData({ confirmVisible: false })
+    this.startTimer()
+  },
+  onHide() {
+    this.clearTimer()
+    http.put(`/tomatoes/${this.data.tomato.id}`, {
+      description: "退出放弃",
+      aborted: true
+    })
+  },
+  onUnload() {
+    this.clearTimer()
+    http.put(`/tomatoes/${this.data.tomato.id}`, {
+      description: "退出放弃",
+      aborted: true
+    })
+  },
 })

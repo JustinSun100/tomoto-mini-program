@@ -1,4 +1,4 @@
-/* pages/me/me.wxss */.cantainer { 
+.cantainer { 
   background: #F6F6F6;
   min-height: 100vh;
   max-height: 100vh;
@@ -97,4 +97,5 @@
   flex-wrap: wrap;
 }
 .qr::after { border: none; }
-.qr { background: transparent; color: #FE996F; font-size: 24rpx;margin-right:40rpx ;}
+.qr { background: transparent; color: #FE996F; font-size: 24rpx;}
+

@@ -1,16 +1,16 @@
 Component({
-  properties:{
-    size:{
-      type:String,
-      value:"",
+  properties: {
+    size: {
+      type: String,
+      value: ''
     },
-    text:{
-      type:String,
-      value:""
+    type: {
+      type: String,
+      value: "default"
     },
-    type:{
-      type:String,
-      value:"defalut"
+    text: {
+      type: String,
+      value: ''
     }
   }
 })

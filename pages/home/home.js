@@ -1,20 +1,15 @@
 // pages/home/home.js
 const {http} = require('../../lib/http.js');
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+Page({
+  updateId: '',
+  updatIndex: '',
   data: {
-    lists:[
-      {id:1,text:"今天学习",finished:true},
-      {id:2,text:"今天学习",finished:false},
-      {id:3,text:"今天学习",finished:false},
-      {id:4,text:"今天学习",finished:false},
-    ],
-    visible:false
-  },
-  confirm(event){
+    lists: [],
+    visibleCreateConfirm: false,
+    visibleUpdateConfirm: false,
+    updateContent: "",
+    animationData: {}
   },
   onShow(){
     http.get('/todos?completed=false').then(response=>{
@@ -36,15 +31,43 @@ Page({
       })
     }
   },
-  destoryTodo(event){
+  changeText(event){
+    let {content,id,index} = event.currentTarget.dataset
+    this.updateId = id
+    this.updatIndex = index
+    this.setData({ visibleUpdateConfirm: true, updateContent: content})
+  },
+  confirmUpdate(event){
+    let content = event.detail
+    http.put(`/todos/${this.updateId}`, {
+      description: content
+    })
+    .then(response => {
+      let todo = response.data.resource
+      this.data.lists[this.updatIndex] = todo
+      this.setData({ lists: this.data.lists })
+      this.hideUpdateConfirm()
+    })
+  },
+  destroyTodo(event){
     let index = event.currentTarget.dataset.index
-    this.data.lists[index].finished = true
-    this.setData({ lists: this.data.lists })
+    let id = event.currentTarget.dataset.id
+    http.put(`/todos/${id}`,{
+      completed: true
+    })
+    .then(response => {
+      let todo = response.data.resource
+      this.data.lists[index] = todo
+      this.setData({ lists: this.data.lists })
+    })
   },
-  hideConfirm(){
-   this.setData({visible:false})
+  hideCreateConfirm(){
+    this.setData({ visibleCreateConfirm: false })
   },
-  showConfirm(){
-    this.setData({visible:true})
-   }
+  showCreateConfirm(){
+    this.setData({ visibleCreateConfirm: true })
+  },
+  hideUpdateConfirm(){
+    this.setData({ visibleUpdateConfirm: false })
+  }
 })

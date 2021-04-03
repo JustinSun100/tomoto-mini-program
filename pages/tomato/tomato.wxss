@@ -1,5 +1,5 @@
 /* pages/tomato/tomato.wxss */
-.container {
+.cantainer {
   background: #F0F7F6;
   height: 100vh;
 }
@@ -8,4 +8,5 @@
   padding-bottom: 139rpx;
 }
 .stop {
+  margin-bottom: 48rpx;
 }
