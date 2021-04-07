@@ -18,7 +18,6 @@ Page({
   },
   confirmCreate(event){
     let content = event.detail
-    console.log(content)
     if (content) {
       http.post('/todos',{
           completed: false, description: content
@@ -63,6 +62,10 @@ Page({
   },
   hideCreateConfirm(){
     this.setData({ visibleCreateConfirm: false })
+  },
+  vibrateLongTap: function () {
+    // 使手机振动400ms
+    wx.vibrateLong();
   },
   showCreateConfirm(){
     this.setData({ visibleCreateConfirm: true })

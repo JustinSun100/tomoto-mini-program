@@ -10,3 +10,11 @@
 .stop {
   margin-bottom: 48rpx;
 }
+.deadline{
+  position: relative;
+  top: 20%;
+display: flex;
+  font-size:40rpx;
+  color: #eb5533;
+justify-content:center;
+}

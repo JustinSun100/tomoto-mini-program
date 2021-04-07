@@ -73,3 +73,10 @@
     border-radius: 50%;
     background: #FE996F;
   }  
+  @keyframes tt{
+    from{opacity: 0.9;}
+    to{opacity: 0;}
+  }
+  .todoList .item.xx{
+    animation:tt 3s forwards;
+  }

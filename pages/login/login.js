@@ -5,6 +5,7 @@ Page({
   data: {
 
   },
+  
   //点击按钮 => 调用小程序原生的 wx.login => 参数 => http.post => 返回 user
   // => 保存user => 返回首页
   login(event){
@@ -30,6 +31,7 @@ Page({
       wx.reLaunch({ url: "/pages/home/home" })
     })
   },
+  
   saveMessage(response){
     wx.setStorageSync('me', response.data.resource)
     wx.setStorageSync('X-token', response.header["X-token"])
